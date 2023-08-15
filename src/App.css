@@ -1,0 +1,52 @@
+/* For WebKit browsers */
+::-webkit-scrollbar {
+    width: 5px;
+    /* Adjust the width of the scrollbar */
+}
+
+::-webkit-scrollbar-track {
+    background: #BFD7EA;
+    /* Change the background color of the track */
+}
+
+::-webkit-scrollbar-thumb {
+    background: #2E0014;
+    /* Change the color of the scrollbar thumb */
+    /* Add rounded corners to the scrollbar thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #BFD7EA;
+    /* Change the color of the scrollbar thumb on hover */
+}
+
+@keyframes floatAnimation {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.float {
+    animation: floatAnimation 5s infinite ease-in-out;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(100%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+.sliding-animation {
+    animation: slideIn 0.3s ease-in-out forwards;
+    transform: translateY(100%);
+}
