@@ -11,8 +11,8 @@ function Footer() {
         });
     })
     return (
-        <div className="bg-[#0B3954] px-12 flex justify-between items-center text-white font-bold py-6 sm:py-4 lg:flex-row space-y-4 flex-col overflow-hidden">
-            <a href="/" className="text-2xl text-white  font-poppins">
+        <div className="bg-[#fffbfa] px-12 flex justify-between items-center text-black font-bold py-6 sm:py-4 lg:flex-row space-y-4 flex-col overflow-hidden">
+            <a href="/" className="text-2xl text-black  font-poppins">
                 <a href="#home">TR1TON SHIELD EDITION</a>
             </a>
             <p className="mt-4 text-center font-poppins sm:mt-0 sm:ml-4 sm:mr-4">

@@ -16,8 +16,29 @@ import Footer from './Components/Footer';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 function App() {
+  const [index, setIndex] = useState(0);
+  const text = "TR1TON SHIELD EDITION";
+  useEffect(() => {
+    if (index < text.length) {
+      const timer = setTimeout(() => {
+        setIndex((prevIndex) => prevIndex + 1);
+      }, 250); // Adjust the delay for typing speed
 
+      // Clear timeout if the component is unmounted
+      return () => clearTimeout(timer);
+    }
+  }, [index]);
 
+  useEffect(() => {
+    if (index < text.length) {
+      const timer = setTimeout(() => {
+        setIndex((prevIndex) => prevIndex + 1);
+      }, 150); // Adjust the delay for typing speed
+
+      // Clear timeout if the component is unmounted
+      return () => clearTimeout(timer);
+    }
+  }, [index]);
 
   const cardsData = [
     {
@@ -121,9 +142,17 @@ function App() {
   ]
 
   return (
-    <div className='min-h-screen h-auto bg-[#BFD7EA]'>
+    <div className='min-h-screen h-auto bg-[#FFFBFA]'>
       <Navbar />
-      <div className="container mx-auto grid grid-cols-2 sm:grid-cols-4 lg:mt-10">
+      <div id='home' className='min-h-screen h-auto text-center flex flex-col items-center justify-center bg-gradient border border-gray-200'>
+        <h1 className='text-6xl lg:text-9xl font-poppins font-bold'>
+          {text.substring(0, index)}
+        </h1>
+        <h1 className='text-2xl lg:text-4xl font-poppins font-semibold p-12' data-aos="fade-up" data-aos-delay={3000}>
+          Where Legends Emerge from Limited Supply!
+        </h1>
+      </div>
+      <div id='mint' className="container mx-auto grid grid-cols-1 sm:grid-cols-4 lg:mt-10 ">
         {cardsData.map((card, index) => (
           <Card
             key={index}
@@ -136,7 +165,7 @@ function App() {
           />
         ))}
       </div>
-      <div className="container mx-auto grid grid-cols-2 sm:grid-cols-4">
+      <div className="container mx-auto grid grid-cols-1 sm:grid-cols-4 mb-4">
         {cardsData2.map((card, index) => (
           <Card
             key={index}
