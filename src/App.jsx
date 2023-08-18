@@ -4,14 +4,22 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import Navbar from './Components/Navbar'
 import Card from './Components/Card';
-import img1 from './assets/1.png';
-import img2 from './assets/45.png';
-import img3 from './assets/47.png';
-import img4 from './assets/60.png';
-import img5 from './assets/Harrypotter.png';
-import img6 from './assets/Heisenberg.png';
-import img7 from './assets/Hippo.png';
-import img8 from './assets/Wolverine2.png';
+import img1 from './assets/Tr1ton-Shield-Edition-01-Clan.jpg';
+import img2 from './assets/Tr1ton-Shield-Edition-02-Ted.jpg';
+import img3 from './assets/Tr1ton-Shield-Edition-03-Rooted.jpg';
+import img4 from './assets/Tr1ton-Shield-Edition-04-Leader.jpg';
+import img5 from './assets/Tr1ton-Shield-Edition-05-Breath.jpg';
+import img6 from './assets/Tr1ton-Shield-Edition-06-Grounded.jpg';
+import img7 from './assets/Tr1ton-Shield-Edition-07-Alive.jpg';
+import img8 from './assets/Tr1ton-Shield-Edition-08-Be-Bold.jpg';
+import img9 from './assets/Tr1ton-Shield-Edition-09-Thunder.jpg';
+import img10 from './assets/Tr1ton-Shield-Edition-10-Royal-Lion.jpg';
+import img11 from './assets/Tr1ton-Shield-Edition-11-Fight.jpg';
+import img12 from './assets/Tr1ton-Shield-Edition-12-Hell.jpg';
+import img13 from './assets/Tr1ton-Shield-Edition-13-Silence.jpg';
+import img14 from './assets/Tr1ton-Shield-Edition-14-Flame.jpg';
+import img15 from './assets/Tr1ton-Shield-Edition-15-Wing-of-Freedom.jpg';
+import img16 from './assets/Tr1ton-Shield-Edition-16-Sting.jpg';
 import Footer from './Components/Footer';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -57,7 +65,7 @@ function App() {
       image: img3,
       name: 'Rooted',
       minCost: "Free",
-      maxSupply: 50,
+      maxSupply: 50,tt
     },
     {
       image: img4,
@@ -92,49 +100,49 @@ function App() {
   ];
   const cardsData2 = [
     {
-      image: img1,
+      image: img9,
       name: 'Thunder',
       minCost: "Free",
       maxSupply: 25,
     },
     {
-      image: img2,
+      image: img10,
       name: 'Royal Lion',
       minCost: "Free",
       maxSupply: 25,
     },
     {
-      image: img3,
+      image: img11,
       name: 'Fight',
       minCost: "Free",
       maxSupply: 25,
     },
     {
-      image: img4,
+      image: img12,
       name: 'Hell',
       minCost: "Free",
       maxSupply: 25,
     },
     {
-      image: img8,
+      image: img13,
       name: 'Silence',
       minCost: "Free",
       maxSupply: 1,
     },
     {
-      image: img5,
+      image: img14,
       name: 'Flame',
       minCost: "Free",
       maxSupply: 1,
     },
     {
-      image: img6,
+      image: img15,
       name: 'Wing of Freedom',
       minCost: "Free",
       maxSupply: 20,
     },
     {
-      image: img7,
+      image: img16,
       name: 'Sting',
       minCost: "Free",
       maxSupply: 10,
