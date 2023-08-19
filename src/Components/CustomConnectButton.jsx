@@ -55,7 +55,7 @@ export const CustomConnectButton = () => {
                             return (
                                 <div style={{ display: 'flex', gap: 12 }} className='ml-2 justify-center'>
                                     <button
-
+                                        onClick={openChainModal}
                                         className='font-poppins text-center bg-gray-200 text-gray-800 rounded-md px-2 h-10 my-auto transition-all duration-100 hover:scale-110 shadow-lg'
                                         style={{ display: 'flex', alignItems: 'center' }}
                                         type="button"

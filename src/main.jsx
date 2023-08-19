@@ -16,15 +16,16 @@ import {
   optimism,
   arbitrum,
   zora,
+  sepolia,
   goerli,
 } from "wagmi/chains";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
 
 const { chains, publicClient } = configureChains(
-  [mainnet, polygon, optimism, arbitrum, zora],
+  [mainnet, polygon, optimism, arbitrum, zora, sepolia, goerli],
   [
-    alchemyProvider({ apiKey: "yRthIbfiUEfM6mhXuauouWuULNuLYbko" }),
+    alchemyProvider({ apiKey: "xWVuWbGYdyX7vdXGL5_HWOBw28EhRdBz" }),
     publicProvider(),
   ]
 );

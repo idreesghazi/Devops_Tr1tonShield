@@ -1,17 +1,55 @@
 import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCoins, faBoxes } from '@fortawesome/free-solid-svg-icons';
+import { useAccount, useContractWrite, usePrepareContractWrite, useWaitForTransaction } from 'wagmi'
+import { abi as wagmigotchiABI } from '../../contracts-abi.js';
 
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { Dialog } from '@headlessui/react'
 import crossIcon from '../assets/cross.svg'
+import { parseEther } from 'ethers';
 
-function Card({ image, name, minCost, maxSupply, index }) {
+const nftContractAddress = '0x874fC3d9Ae9C9668DD5307D93350168E81caf6C7';
+const nftContractAbi = wagmigotchiABI;
+
+const contractConfig = {
+  nftContractAddress,
+  nftContractAbi,
+};
+
+// const {
+//   data: txData,
+//   isSuccess: txSuccess,
+//   error: txError,
+// } = useWaitForTransaction({
+//   hash: mintData?.hash,
+// });
+
+function Card({ id, image, name, minCost, maxSupply, index }) {
   const [isHovered, setIsHovered] = useState(false);
   const [isPopupOpen, setPopupOpen] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [count, setCount] = useState(1);
+  const { address, isConnecting, isDisconnected } = useAccount()
+
+
+  const { data, isLoading, isSuccess, write } = useContractWrite({
+    address: '0x874fC3d9Ae9C9668DD5307D93350168E81caf6C7',
+    abi: wagmigotchiABI,
+    functionName: 'mint',
+  })
+
+  const { config: contractWriteConfig } = usePrepareContractWrite({
+    ...contractConfig,
+    functionName: 'mint',
+    args: [
+      {
+        mintAmount: quantity,
+        gasLimit: 500000,
+      }
+    ]
+  });
 
   const handleMintClick = () => {
     setPopupOpen(true);
@@ -30,17 +68,25 @@ function Card({ image, name, minCost, maxSupply, index }) {
   const incCount = () => {
     if (count < maxSupply) {
       setCount(count + 1);
+      setQuantity(count + 1);
     }
+
   }
   const decCount = () => {
     if (count === 1) { return }
     setCount(count - 1);
-    W
+    setQuantity(count - 1);
   }
-  const handleMintConfirm = () => {
+  const handleMintConfirm = (id, quantity) => {
     // Perform actions with the selected quantity (e.g., mint NFTs)
     console.log(`Minting ${quantity} NFT(s)`);
+    alert("mintingNightmare")
     setPopupOpen(false);
+    write({
+      args: [id, address, quantity, '0x'],
+      from: '0xA0Cf798816D4b9b9866b5330EEa46a18382f251e',
+      value: parseEther('0.01'),
+    })
   };
   useEffect(() => {
     AOS.init({
@@ -120,7 +166,8 @@ function Card({ image, name, minCost, maxSupply, index }) {
                 <div className='flex font-poppins items-center justify-center'>
                   <button
                     className="bg-blue-400 w-52 transition-all transform duration-100 hover:scale-105 text-white rounded-md px-4 py-2 "
-                    onClick={handleMintConfirm}
+                    onClick={() => handleMintConfirm(id, quantity)}
+                  // onClick={() => mint?.(quantity)}
                   >
                     Mint
                   </button>

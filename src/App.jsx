@@ -50,48 +50,56 @@ function App() {
 
   const cardsData = [
     {
+      id: 1,
       image: img1,
       name: 'Clan',
       minCost: "Free",
       maxSupply: 50,
     },
     {
+      id: 2,
       image: img2,
       name: 'Ted',
       minCost: "Free",
       maxSupply: 50,
     },
     {
+      id: 3,
       image: img3,
       name: 'Rooted',
       minCost: "Free",
-      maxSupply: 50,tt
+      maxSupply: 50,
     },
     {
+      id: 4,
       image: img4,
       name: 'Leader',
       minCost: "Free",
       maxSupply: 50,
     },
     {
+      id: 5,
       image: img5,
       name: 'Breath',
       minCost: "Free",
       maxSupply: 50,
     },
     {
+      id: 6,
       image: img6,
       name: 'Grounded',
       minCost: "Free",
       maxSupply: 1,
     },
     {
+      id: 7,
       image: img7,
       name: 'Alive',
       minCost: "Free",
       maxSupply: 50,
     },
     {
+      id: 8,
       image: img8,
       name: 'Be Bold',
       minCost: "Free",
@@ -100,54 +108,63 @@ function App() {
   ];
   const cardsData2 = [
     {
+      id: 9,
       image: img9,
       name: 'Thunder',
       minCost: "Free",
       maxSupply: 25,
     },
     {
+      id: 10,
       image: img10,
       name: 'Royal Lion',
       minCost: "Free",
       maxSupply: 25,
     },
     {
+      id: 11,
       image: img11,
       name: 'Fight',
       minCost: "Free",
       maxSupply: 25,
     },
     {
+      id: 12,
       image: img12,
       name: 'Hell',
       minCost: "Free",
       maxSupply: 25,
     },
     {
+      id: 13,
       image: img13,
       name: 'Silence',
       minCost: "Free",
       maxSupply: 1,
     },
     {
+      id: 14,
       image: img14,
       name: 'Flame',
       minCost: "Free",
       maxSupply: 1,
     },
     {
+      id: 15,
       image: img15,
       name: 'Wing of Freedom',
       minCost: "Free",
       maxSupply: 20,
     },
     {
+      id: 16,
       image: img16,
       name: 'Sting',
       minCost: "Free",
       maxSupply: 10,
     },
-  ]
+  ];
+
 
   return (
     <div className='min-h-screen h-auto bg-[#FFFBFA]'>
@@ -165,6 +182,7 @@ function App() {
           <Card
             key={index}
             index={index}
+            id={card.id}
             image={card.image}
             name={card.name}
             minCost={card.minCost}
@@ -178,6 +196,7 @@ function App() {
           <Card
             key={index}
             index={index}
+            id={card.id}
             image={card.image}
             name={card.name}
             minCost={card.minCost}
@@ -186,7 +205,7 @@ function App() {
           />
         ))}
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </div >
   )
 }
