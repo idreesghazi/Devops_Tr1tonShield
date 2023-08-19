@@ -35,7 +35,7 @@ function Card({ id, image, name, minCost, maxSupply, index }) {
 
 
   const { data, isLoading, isSuccess, write } = useContractWrite({
-    address: '0x874fC3d9Ae9C9668DD5307D93350168E81caf6C7',
+    address: '0x2808E2B9D2a2462B722Ec19B78005C226F5807ca',
     abi: wagmigotchiABI,
     functionName: 'mint',
   })
