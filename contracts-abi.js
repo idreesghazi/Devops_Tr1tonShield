@@ -30,52 +30,6 @@ export const abi = [
         "type": "event"
     },
     {
-        "inputs": [
-            {
-                "internalType": "address",
-                "name": "account",
-                "type": "address"
-            },
-            {
-                "internalType": "uint256",
-                "name": "id",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "value",
-                "type": "uint256"
-            }
-        ],
-        "name": "burn",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "address",
-                "name": "account",
-                "type": "address"
-            },
-            {
-                "internalType": "uint256[]",
-                "name": "ids",
-                "type": "uint256[]"
-            },
-            {
-                "internalType": "uint256[]",
-                "name": "values",
-                "type": "uint256[]"
-            }
-        ],
-        "name": "burnBatch",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
         "inputs": [],
         "name": "defineTypeNames",
         "outputs": [],
@@ -83,7 +37,13 @@ export const abi = [
         "type": "function"
     },
     {
-        "inputs": [],
+        "inputs": [
+            {
+                "internalType": "string",
+                "name": "baseTokenURI",
+                "type": "string"
+            }
+        ],
         "name": "initialize",
         "outputs": [],
         "stateMutability": "nonpayable",
@@ -110,19 +70,9 @@ export const abi = [
                 "type": "uint256"
             },
             {
-                "internalType": "address",
-                "name": "account",
-                "type": "address"
-            },
-            {
                 "internalType": "uint256",
                 "name": "amount",
                 "type": "uint256"
-            },
-            {
-                "internalType": "bytes",
-                "name": "data",
-                "type": "bytes"
             }
         ],
         "name": "mint",
@@ -147,19 +97,6 @@ export const abi = [
             }
         ],
         "name": "OwnershipTransferred",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
-            {
-                "indexed": false,
-                "internalType": "address",
-                "name": "account",
-                "type": "address"
-            }
-        ],
-        "name": "Paused",
         "type": "event"
     },
     {
@@ -401,19 +338,6 @@ export const abi = [
         "type": "event"
     },
     {
-        "anonymous": false,
-        "inputs": [
-            {
-                "indexed": false,
-                "internalType": "address",
-                "name": "account",
-                "type": "address"
-            }
-        ],
-        "name": "Unpaused",
-        "type": "event"
-    },
-    {
         "inputs": [
             {
                 "internalType": "address",
@@ -596,19 +520,6 @@ export const abi = [
                 "internalType": "address",
                 "name": "",
                 "type": "address"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "paused",
-        "outputs": [
-            {
-                "internalType": "bool",
-                "name": "",
-                "type": "bool"
             }
         ],
         "stateMutability": "view",

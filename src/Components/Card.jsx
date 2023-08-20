@@ -10,13 +10,6 @@ import { Dialog } from '@headlessui/react'
 import crossIcon from '../assets/cross.svg'
 import { parseEther } from 'ethers';
 
-const nftContractAddress = '0x874fC3d9Ae9C9668DD5307D93350168E81caf6C7';
-const nftContractAbi = wagmigotchiABI;
-
-const contractConfig = {
-  nftContractAddress,
-  nftContractAbi,
-};
 
 // const {
 //   data: txData,
@@ -35,21 +28,10 @@ function Card({ id, image, name, minCost, maxSupply, index }) {
 
 
   const { data, isLoading, isSuccess, write } = useContractWrite({
-    address: '0x2808E2B9D2a2462B722Ec19B78005C226F5807ca',
+    address: '0x6c74b560d3a2793A00d710a3d013a2A0CE832B99',
     abi: wagmigotchiABI,
     functionName: 'mint',
   })
-
-  const { config: contractWriteConfig } = usePrepareContractWrite({
-    ...contractConfig,
-    functionName: 'mint',
-    args: [
-      {
-        mintAmount: quantity,
-        gasLimit: 500000,
-      }
-    ]
-  });
 
   const handleMintClick = () => {
     setPopupOpen(true);
@@ -63,7 +45,7 @@ function Card({ id, image, name, minCost, maxSupply, index }) {
     const newQuantity = count;
     if (newQuantity >= 1 && newQuantity <= maxSupply) {
       setQuantity(newQuantity);
-    }
+    } t
   };
   const incCount = () => {
     if (count < maxSupply) {
@@ -80,12 +62,11 @@ function Card({ id, image, name, minCost, maxSupply, index }) {
   const handleMintConfirm = (id, quantity) => {
     // Perform actions with the selected quantity (e.g., mint NFTs)
     console.log(`Minting ${quantity} NFT(s)`);
-    alert("mintingNightmare")
     setPopupOpen(false);
     write({
-      args: [id, address, quantity, '0x'],
-      from: '0xA0Cf798816D4b9b9866b5330EEa46a18382f251e',
-      value: parseEther('0.01'),
+      args: [id, quantity],
+      // from: address,
+      // value: parseEther('0.01'),
     })
   };
   useEffect(() => {
