@@ -1,8 +1,8 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
-import './index.css'
-import '@rainbow-me/rainbowkit/styles.css';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App.jsx";
+import "./index.css";
+import "@rainbow-me/rainbowkit/styles.css";
 
 import {
   getDefaultWallets,
@@ -10,29 +10,21 @@ import {
   darkTheme,
 } from "@rainbow-me/rainbowkit";
 import { configureChains, createConfig, WagmiConfig } from "wagmi";
-import {
-  mainnet,
-  polygon,
-  optimism,
-  arbitrum,
-  zora,
-  sepolia,
-  goerli,
-} from "wagmi/chains";
+import { mainnet, sepolia } from "wagmi/chains";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
 
 const { chains, publicClient } = configureChains(
-  [mainnet, polygon, optimism, arbitrum, zora, sepolia, goerli],
+  [mainnet, sepolia],
   [
-    alchemyProvider({ apiKey: "xWVuWbGYdyX7vdXGL5_HWOBw28EhRdBz" }),
+    alchemyProvider({ apiKey: "3d896hhwwnUzPur_UQurCLuHyURxxVT7" }),
     publicProvider(),
   ]
 );
 
 const { connectors } = getDefaultWallets({
-  appName: "alapin-project",
-  projectId: "59504b48694598288c9469a5a2a6f0be",
+  appName: "triton",
+  projectId: "a02139fa576ab9bb290d4730e70351cf",
   chains,
 });
 
@@ -46,11 +38,9 @@ console.log(chains, publicClient);
 console.log(connectors);
 console.log("wagmiConfig", wagmiConfig);
 
-
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <WagmiConfig config={wagmiConfig}>
     <RainbowKitProvider
-      coolMode
       chains={chains}
       theme={darkTheme({
         accentColor: "#ea9d294d",
@@ -60,9 +50,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         overlayBlur: "small",
       })}
     >
-
       <App />
-
     </RainbowKitProvider>
   </WagmiConfig>
-)
+);

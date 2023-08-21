@@ -2,22 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCoins, faBoxes } from '@fortawesome/free-solid-svg-icons';
 import { useAccount, useContractWrite, usePrepareContractWrite, useWaitForTransaction } from 'wagmi'
-import { abi as wagmigotchiABI } from '../../contracts-abi.js';
+import { abi as NFTContractABI } from '../../contracts-abi.js';
 
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { Dialog } from '@headlessui/react'
 import crossIcon from '../assets/cross.svg'
 import { parseEther } from 'ethers';
-
-
-// const {
-//   data: txData,
-//   isSuccess: txSuccess,
-//   error: txError,
-// } = useWaitForTransaction({
-//   hash: mintData?.hash,
-// });
 
 function Card({ id, image, name, minCost, maxSupply, index }) {
   const [isHovered, setIsHovered] = useState(false);
@@ -27,9 +18,9 @@ function Card({ id, image, name, minCost, maxSupply, index }) {
   const { address, isConnecting, isDisconnected } = useAccount()
 
 
-  const { data, isLoading, isSuccess, write } = useContractWrite({
-    address: '0x6c74b560d3a2793A00d710a3d013a2A0CE832B99',
-    abi: wagmigotchiABI,
+  const { data, isLoading, isSuccess, writeAsync: mintNFTs } = useContractWrite({
+    address: '0x11f371E0F63aFcc5b60D6eB8986703216464D392',
+    abi: NFTContractABI,
     functionName: 'mint',
   })
 
@@ -45,7 +36,7 @@ function Card({ id, image, name, minCost, maxSupply, index }) {
     const newQuantity = count;
     if (newQuantity >= 1 && newQuantity <= maxSupply) {
       setQuantity(newQuantity);
-    } t
+    }
   };
   const incCount = () => {
     if (count < maxSupply) {
@@ -59,14 +50,12 @@ function Card({ id, image, name, minCost, maxSupply, index }) {
     setCount(count - 1);
     setQuantity(count - 1);
   }
-  const handleMintConfirm = (id, quantity) => {
+  const handleMintConfirm = async (id, quantity) => {
     // Perform actions with the selected quantity (e.g., mint NFTs)
     console.log(`Minting ${quantity} NFT(s)`);
     setPopupOpen(false);
-    write({
+    await mintNFTs({
       args: [id, quantity],
-      // from: address,
-      // value: parseEther('0.01'),
     })
   };
   useEffect(() => {
@@ -84,16 +73,16 @@ function Card({ id, image, name, minCost, maxSupply, index }) {
         <img
           src={image}
           alt={name}
-          className="mx-auto lg:w-64 xl:w-96 transition-transform rounded-lg transform group-hover:scale-105 "
+          className="mx-auto transition-transform transform rounded-lg lg:w-64 xl:w-96 group-hover:scale-105 "
         />
       </div>
-      <div className='bg-white p-4'>
-        <h3 className="text-lg font-poppins font-semibold mb-2 sm:text-base md:text-lg lg:text-xl lg:text-start text-center ">
+      <div className='p-4 bg-white'>
+        <h3 className="mb-2 text-lg font-semibold text-center font-poppins sm:text-base md:text-lg lg:text-xl lg:text-start ">
           {name}
         </h3>
-        <div className="flex flex-row lg:justify-between lg:items-center items-center justify-between">
+        <div className="flex flex-row items-center justify-between lg:justify-between lg:items-center">
           <div className="flex items-center">
-            <span className="font-poppins sm:text-xs md:text-base lg:text-lg text-center">
+            <span className="text-center font-poppins sm:text-xs md:text-base lg:text-lg">
               Min Cost: <a className='font-bold'>{minCost}</a>
             </span>
           </div>
@@ -104,7 +93,7 @@ function Card({ id, image, name, minCost, maxSupply, index }) {
           </div>
 
         </div>
-        <div className='flex lg:items-center lg:justify-center px-2 mt-2'>
+        <div className='flex px-2 mt-2 lg:items-center lg:justify-center'>
           <button
             onClick={handleMintClick}
             className="sliding-animation transition-all transform duration-100 w-[20rem] rounded-xl shadow-lg hover:text-[#0B3954] bg-blue-400 lg:p-2 p-2 left-0 bottom-0  flex items-center justify-center text-white font-poppins font-semibold text-base lg:text-xl"
@@ -126,27 +115,27 @@ function Card({ id, image, name, minCost, maxSupply, index }) {
           {/* Full-screen container to center the panel */}
           <div className="fixed inset-0 flex items-center justify-center p-4">
             {/* The actual dialog panel  */}
-            <Dialog.Panel className="mx-auto max-w-sm bg-white rounded-lg p-4 flex flex-col w-full shadow-xl ">
-              <div className=" p-4 flex flex-col w-full gap-4">
+            <Dialog.Panel className="flex flex-col w-full max-w-sm p-4 mx-auto bg-white rounded-lg shadow-xl ">
+              <div className="flex flex-col w-full gap-4 p-4 ">
                 <button
                   className="text-gray-600 transition-all transform duration-100 hover:scale-110 rounded-md w-[1rem] self-end"
                   onClick={handlePopupClose}
                 >
                   <img src={crossIcon} alt='CrossImg' />
                 </button>
-                <h2 className="text-xl font-poppins text-center font-semibold mb-2">Select Quantity</h2>
+                <h2 className="mb-2 text-xl font-semibold text-center font-poppins">Select Quantity</h2>
                 <div className='flex items-center justify-center gap-5'>
-                  <button onClick={decCount} className='font-poppins font-bold font-3xl text-center transition-all transform duration-100 hover:scale-125'>-</button>
+                  <button onClick={decCount} className='font-bold text-center transition-all duration-100 transform font-poppins font-3xl hover:scale-125'>-</button>
                   <div
-                    className="border p-2 rounded-md mb-2 font-poppins w-20 text-center" // Retain the "text-center" class
+                    className="w-20 p-2 mb-2 text-center border rounded-md font-poppins" // Retain the "text-center" class
                   >
                     {count}
                   </div>
-                  <button onClick={incCount} className='font-poppins font-bold font-3xl text-center transition-all transform duration-100 hover:scale-125'>+</button>
+                  <button onClick={incCount} className='font-bold text-center transition-all duration-100 transform font-poppins font-3xl hover:scale-125'>+</button>
                 </div>
-                <div className='flex font-poppins items-center justify-center'>
+                <div className='flex items-center justify-center font-poppins'>
                   <button
-                    className="bg-blue-400 w-52 transition-all transform duration-100 hover:scale-105 text-white rounded-md px-4 py-2 "
+                    className="px-4 py-2 text-white transition-all duration-100 transform bg-blue-400 rounded-md w-52 hover:scale-105 "
                     onClick={() => handleMintConfirm(id, quantity)}
                   // onClick={() => mint?.(quantity)}
                   >
@@ -171,17 +160,17 @@ export default Card;
 
 
 // (
-//   <div className="fixed top-0 left-0 w-full h-full bg-gray-500 bg-opacity-50 flex items-center justify-center">
-//     <div className="bg-white rounded-lg p-4 flex flex-col w-full">
-//       <h2 className="text-xl font-poppins text-center font-semibold mb-2">Select Quantity</h2>
+//   <div className="fixed top-0 left-0 flex items-center justify-center w-full h-full bg-gray-500 bg-opacity-50">
+//     <div className="flex flex-col w-full p-4 bg-white rounded-lg">
+//       <h2 className="mb-2 text-xl font-semibold text-center font-poppins">Select Quantity</h2>
 //       <input
 //         type="number"
 //         placeholder='Enter Quantity'
-//         className="border p-2 rounded-md mb-2"
+//         className="p-2 mb-2 border rounded-md"
 //         value={quantity}
 //         onChange={handleQuantityChange}
 //       />
-//       <div className='flex font-poppins items-center justify-center'>
+//       <div className='flex items-center justify-center font-poppins'>
 //         <button
 //           className="bg-[#c1b9f9] transition-all transform duration-100 hover:scale-105 text-white rounded-md px-4 py-2"
 //           onClick={handleMintConfirm}
